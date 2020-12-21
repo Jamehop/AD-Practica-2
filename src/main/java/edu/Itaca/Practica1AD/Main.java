@@ -64,8 +64,6 @@ public class Main {
 	}
 
 	public static void añadirCliente() throws SQLException {
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jardineria?serverTimezone=UTC", "root",
-				"admin");
 
 		System.out.println("Introduce los datos del cliente:");
 
@@ -104,8 +102,6 @@ public class Main {
 
 	public static void mostrarCliente() throws SQLException {
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jardineria?serverTimezone=UTC", "root",
-					"admin");
 			System.out.println("Introduce el codigo del cliente:");
 			int codigo_cliente = Leer.pedirEnteroValidar();
 			String sql = "SELECT * FROM cliente WHERE codigo_cliente=" + codigo_cliente;
@@ -128,8 +124,6 @@ public class Main {
 	}
 
 	public static void mostrarTodosClientes() throws SQLException {
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jardineria?serverTimezone=UTC", "root",
-				"admin");
 		String sql = "SELECT * FROM cliente ORDER BY nombre_cliente ASC";
 
 		Statement statement = conn.createStatement();
@@ -147,8 +141,6 @@ public class Main {
 	}
 
 	public static void buscarClientes() throws SQLException {
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jardineria?serverTimezone=UTC", "root",
-				"admin");
 		System.out.println("Introduce el nombre, contacto o apellido del cliente a buscar:");
 		String palabra = Leer.pedirCadena();
 		String sql = "SELECT * FROM cliente WHERE nombre_cliente LIKE '%" + palabra + "%' OR nombre_contacto LIKE '%"
@@ -168,25 +160,57 @@ public class Main {
 	}
 
 	public static void updateClientes() throws SQLException {
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jardineria?serverTimezone=UTC", "root",
-				"admin");
 		System.out.println("Introduce el codigo del producto:");
-		int codigo = Leer.pedirEnteroValidar();
-		String sql = "SELECT * FROM producto WHERE codigo_producto=" + codigo;
+		String codigo=Leer.pedirCadena();
+		String sql = "SELECT * FROM producto WHERE codigo_producto='" + codigo+"'";
 
 		Statement statement = conn.createStatement();
 		ResultSet result = statement.executeQuery(sql);
 
+		
 		while (result.next()) {
 			int codigo_producto = result.getInt(1);
 			String nombre = result.getString(2);
 			String gama = result.getString(3);
 			int cantidad_en_stock = result.getInt(7);
-			long precio_venta = result.getLong(8);
+			int precio_venta = result.getInt(8);
 
 			String output = "%s - %s - %s - %s - %s";
 			System.out.println(String.format(output, codigo_producto, nombre, gama, cantidad_en_stock, precio_venta));
 		}
+		
+		/*String nombre = result.getString(2);
+		String gama = result.getString(3);
+		int cantidad_en_stock = result.getInt(7);
+		int precio_venta = result.getInt(8);*/
+		
+		System.out.println("Introduce el nuevo nombre del producto:");
+		String nuevoNombreProducto=Leer.pedirCadena();
+		/*if(nuevoNombreProducto.equalsIgnoreCase("")) {
+			nuevoNombreProducto.contentEquals(nombre);
+		}*/
+		System.out.println("Introduce la nueva gama del producto;");
+		String nuevaGama=Leer.pedirCadena();
+		/*if(nuevaGama.equalsIgnoreCase("")) {
+			nuevaGama.contentEquals(gama);
+		}*/
+		System.out.println("Introduce la nueva cantidad en stock:");
+		int nuevaCantidad=Leer.pedirEnteroValidar();
+		/*if(nuevaCantidad==0) {
+			nuevaCantidad=cantidad_en_stock;
+		}*/
+		System.out.println("Introduce el nuevo precio venta:");
+		int nuevoPrecio=Leer.pedirEnteroValidar();
+		/*if(nuevoPrecio==0) {
+			nuevoPrecio=precio_venta;
+		}*/
+		
+		
+		String sql2="UPDATE producto SET nombre='"+nuevoNombreProducto+"', gama='"+nuevaGama+"', cantidad_en_stock='"+nuevaCantidad+"', precio_venta='"+nuevoPrecio+"' WHERE codigo_producto="+codigo;
 
+		PreparedStatement statement2 = conn.prepareStatement(sql2);
+		statement2.execute();
+		System.out.println("Modificado con exito.");
+		
 	}
 }
