@@ -14,7 +14,7 @@
 
 		<!-- Assume test is the database name -->
 		<property name="hibernate.connection.url">
-			jdbc:mysql://root:3306/jardineria?serverTimezone=UTC
+			jdbc:mysql://localhost:3306/jardineria?serverTimezone=UTC
 		</property>
 
 		<property name="hibernate.connection.username">
@@ -22,11 +22,11 @@
 		</property>
 
 		<property name="hibernate.connection.password">
-			root123
+			admin
 		</property>
 
 		<!-- List of XML mapping files -->
-		<mapping resource="Employee.hbm.xml" />
+		<mapping class="edu.Itaca.Practica1AD.Cliente" />
 
 	</session-factory>
 </hibernate-configuration>

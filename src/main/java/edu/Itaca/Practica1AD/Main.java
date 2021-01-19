@@ -2,29 +2,27 @@ package edu.Itaca.Practica1AD;
 
 import java.io.*;
 import java.io.InputStreamReader;
+import java.lang.module.Configuration;
 import java.sql.*;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.spi.SessionFactoryServiceRegistryBuilder;
 
 import utilidades.Leer;
 
 public class Main {
 	static Connection conn = null;
+	private static Session session;
 	static BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 
 	public static void main(String[] args) {
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jardineria?serverTimezone=UTC", "root",
-					"admin");
-			/*
-			Statement stmt = conn.createStatement();
-			 * ResultSet rs = stmt.executeQuery("select * from cliente");
-			 * 
-			 * while (rs.next()) { String id = rs.getString("codigo_cliente");
-			 * System.out.println(id); String name = rs.getString("nombre_cliente");
-			 * System.out.println(name); }
-			 */
-			System.out.println(
-					"Elige lo que quieres hacer: \n1. Añadir cliente\n2. Mostrar cliente\n3. Mostrar todos clientes\n4. Buscar cliente\n5. Edita producto\n0. Salir");
+			HibernateUtil.setUp();
+			
+			System.out.println("Elige lo que quieres hacer: \n1. Añadir cliente\n2. Mostrar cliente\n3. Mostrar todos clientes\n4. Buscar cliente\n5. Edita producto\n0. Salir");
 
 			int opcion = Leer.pedirEnteroValidar();
 			while (opcion != 0) {
@@ -52,15 +50,11 @@ public class Main {
 				System.out.println("Elige lo que quieres hacer: \n1. Añadir cliente\n2. Mostrar cliente\n3. Mostrar todos clientes\n4. Buscar cliente\n5. Edita producto\n0. Salir");
 				opcion = Leer.pedirEnteroValidar();
 			}
-
-			conn.close();
-
-		} catch (
-
-		SQLException ex) {
-			ex.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
+		
 	}
 
 	public static void añadirCliente() throws SQLException {
@@ -213,4 +207,5 @@ public class Main {
 		System.out.println("Modificado con exito.");
 		
 	}
+	
 }

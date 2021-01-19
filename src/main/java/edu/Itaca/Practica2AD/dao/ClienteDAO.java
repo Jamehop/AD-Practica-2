@@ -2,31 +2,39 @@ package edu.Itaca.Practica2AD.dao;
 
 import java.util.List;
 
-import edu.Itaca.Practica1AD.Main;
+import org.hibernate.Session;
 
-public class ClienteDAO implements DAO<Main>{
+import edu.Itaca.Practica1AD.Cliente;
+import edu.Itaca.Practica1AD.HibernateUtil;
 
-	public Main get(long id) {
+public class ClienteDAO implements DAO<Cliente>{
+
+	public Cliente get(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Main> getAll() {
-		// TODO Auto-generated method stub
+	public List<Cliente> getAll() {
+		try {
+			Session session=HibernateUtil.setUp();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
-	
-	public void create(Main t) {
+
+	public void create(Cliente t) {
+		
+		
+	}
+
+	public void update(Cliente t, String[] params) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void update(Main t, String[] params) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void delete(Main t) {
+	public void delete(Cliente t) {
 		// TODO Auto-generated method stub
 		
 	}
