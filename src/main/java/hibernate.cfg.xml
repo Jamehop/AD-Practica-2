@@ -26,8 +26,11 @@
 		</property>
 
 		<!-- List of XML mapping files -->
-		<mapping class="edu.Itaca.Practica1AD.Cliente" />
-		<mapping class="edu.Itaca.Practica1AD.Main" />
+		<mapping class="edu.Itaca.Practica2AD.Cliente" />
+		<mapping class="edu.Itaca.Practica2AD.Main" />
+		<mapping class="edu.Itaca.Practica2AD.Producto" />
+		<mapping class="edu.Itaca.Practica2AD.DetallePedido" />
+		<mapping class="edu.Itaca.Practica2AD.Pedido" />
 
 	</session-factory>
 </hibernate-configuration>

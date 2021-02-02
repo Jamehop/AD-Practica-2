@@ -1,4 +1,4 @@
-package edu.Itaca.Practica1AD;
+package edu.Itaca.Practica2AD;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
